@@ -6,7 +6,7 @@ Created on Mon Mar 23 22:22:20 2020
 # """
 
 
-def rtree_build(a):
+def stree_build(a):
     n = len(a)
     t = [0]*n + a
     for i in reversed(range(n)):
@@ -14,7 +14,7 @@ def rtree_build(a):
     return t
 
 
-def rtree_update(t, p, v):
+def stree_update(t, p, v):
     n = len(t)//2
     p += n
     t[p] = v
@@ -23,7 +23,7 @@ def rtree_update(t, p, v):
         p >>= 1
         
         
-def rtree_query(t, l, r):
+def stree_query(t, l, r):
     n = len(t)//2
     l += n
     r += n
@@ -41,7 +41,7 @@ def rtree_query(t, l, r):
 
 
 a = [1,2,3,4,5,6,7,8]
-t = rtree_build(a)
-print(rtree_query(t, 3, 6))
-rtree_update(t, 5, 10)
-print(rtree_query(t, 3, 6))
+t = stree_build(a)
+print(stree_query(t, 3, 6))
+stree_update(t, 5, 10)
+print(stree_query(t, 3, 6))
