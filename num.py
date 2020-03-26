@@ -10,7 +10,7 @@ def prime_sieve(n):
 		if p*p > n: 
 			break
 		if is_prime[p]:
-			for kp in range(3*p, n+1, p):
+			for kp in range(3*p, n+1, 2*p):
 				is_prime[kp] = False
 
 	for i in range(2, n+1):
@@ -18,12 +18,11 @@ def prime_sieve(n):
 			yield  i
 
 
-
 def miller(n):
 	r = ((n-1)^(n-2)).bit_length() - 1
 	d = (n-1) >> r
 
-	def witness(n, a):
+	def probably_prime(n, a):
 		x = pow(a, d, n)
 		if  x == 1 or x == n-1:
 			return True
@@ -51,16 +50,14 @@ def miller(n):
 		witnesses = [2, 3, 5, 7, 11, 13, 19, 23, 29, 31, 37] # up to 2^64
 
 	for a in witnesses:
-		if not witness(n, a):
+		if not probably_prime(n, a):
 			return False
+
 	return True
 
 
 primes = [p for p in prime_sieve(1000000)]
-
-
 print(primes[-10:])
-
 for p in primes[-10:]:
 	print(miller(p+2))
 
